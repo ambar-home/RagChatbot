@@ -10,6 +10,7 @@ It describes how document ingestion, retrieval, and LLM-based answer generation 
 - [2️⃣ Architecture ](#2-architecture-how-the-system-is-structured)
 - [3️⃣ Design Decisions ](#3-design-decisions-why-its-built-this-way)
 - [4️⃣ Reasoning ](#4-reasoning-what-problems-this-design-solves)
+- [5️⃣ Trade-offs ]((#5-trade-offs))
 
 ---
 
@@ -197,6 +198,8 @@ Each file does **one job well**:
 
 You can add later:
 - Re-rankers
+- Handling True compliance (HIPAA/GDPR/DPDP/PII)
+- Need to handle to .ppt,.xls, and other document format.
 - Multiple vector stores
 - Tool calling
 - Multi-agent flows
@@ -209,3 +212,38 @@ You can add later:
 - Deterministic indexing
 - Observability via LangSmith
 - Config-driven behavior
+
+
+
+# 5️⃣ Trade-offs
+
+---
+
+## 1️⃣ Accuracy vs Speed (Grounding validation)
+
+- Turning `RAG_VALIDATE_GROUNDING=true` makes answers **more trustworthy** (validated against sources),
+  but it becomes **slower** because the system performs a draft generation followed by a validation step before streaming the final answer.
+
+
+## 2️⃣ Simplicity vs Flexibility (LangGraph pipeline)
+
+- The guard → retrieve → context pipeline is **clean and easy to understand**,
+  but it is intentionally a **basic flow** (single retry, mostly linear). Supporting advanced routing (tools, multi-hop reasoning) would add complexity.
+
+
+## 3️⃣ Lower cost & faster reindex vs More engineering (Incremental indexing)
+
+- Incremental indexing (SHA256-based) saves **time and embedding costs** by reprocessing only changed files,
+  but it requires maintaining additional state (`index_state.json`) and handling document deletions and updates.
+
+
+## 4️⃣ Easy local persistence vs Enterprise scalability (Chroma local DB)
+
+- A locally persisted Chroma database is **simple to run and ideal for demos or small-scale usage**,
+  but enterprise-scale, multi-user, or multi-region deployments typically require a managed vector database and stronger isolation controls.
+
+
+## 5️⃣ Better user experience vs More UI complexity (Streaming in Gradio)
+
+- Streaming responses feel **fast and ChatGPT-like**, improving perceived responsiveness,
+  but they introduce **additional UI and state-management complexity**, such as partial updates and appending citations after streaming completes.
