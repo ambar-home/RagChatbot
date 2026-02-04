@@ -219,31 +219,31 @@ You can add later:
 
 ---
 
-## 1️⃣ Accuracy vs Speed (Grounding validation)
+## Accuracy vs Speed (Grounding validation)
 
 - Turning `RAG_VALIDATE_GROUNDING=true` makes answers **more trustworthy** (validated against sources),
   but it becomes **slower** because the system performs a draft generation followed by a validation step before streaming the final answer.
 
 
-## 2️⃣ Simplicity vs Flexibility (LangGraph pipeline)
+## Simplicity vs Flexibility (LangGraph pipeline)
 
 - The guard → retrieve → context pipeline is **clean and easy to understand**,
   but it is intentionally a **basic flow** (single retry, mostly linear). Supporting advanced routing (tools, multi-hop reasoning) would add complexity.
 
 
-## 3️⃣ Lower cost & faster reindex vs More engineering (Incremental indexing)
+## Lower cost & faster reindex vs More engineering (Incremental indexing)
 
 - Incremental indexing (SHA256-based) saves **time and embedding costs** by reprocessing only changed files,
   but it requires maintaining additional state (`index_state.json`) and handling document deletions and updates.
 
 
-## 4️⃣ Easy local persistence vs Enterprise scalability (Chroma local DB)
+## Easy local persistence vs Enterprise scalability (Chroma local DB)
 
 - A locally persisted Chroma database is **simple to run and ideal for demos or small-scale usage**,
   but enterprise-scale, multi-user, or multi-region deployments typically require a managed vector database and stronger isolation controls.
 
 
-## 5️⃣ Better user experience vs More UI complexity (Streaming in Gradio)
+## Better user experience vs More UI complexity (Streaming in Gradio)
 
 - Streaming responses feel **fast and ChatGPT-like**, improving perceived responsiveness,
   but they introduce **additional UI and state-management complexity**, such as partial updates and appending citations after streaming completes.
