@@ -13,6 +13,7 @@ It describes how document ingestion, retrieval, and LLM-based answer generation 
 
 ---
 
+
 # 1️⃣ Project Code Flow
 
 ---
@@ -50,6 +51,7 @@ The question goes through a **LangGraph pipeline**:
 - The UI also shows **expandable source documents**.
 
 
+
 # 2️⃣ Architecture
 
 
@@ -73,7 +75,6 @@ Handles:
 - Streaming responses
 - Source display
 
-> No AI logic here — only presentation and orchestration.
 
 
 ### 3. Orchestration Layer
@@ -104,6 +105,7 @@ This separation makes the system:
 - Easier to reason about
 - Easier to test
 - Easier to extend
+
 
 
 # 3️⃣ Design Decisions 
@@ -171,7 +173,7 @@ Each file does **one job well**:
 - Orchestration ≠ infrastructure
 - Retrieval ≠ generation
 
-> This is a **principal-level design signal**.
+
 
 
 # 4️⃣ Reasoning 
