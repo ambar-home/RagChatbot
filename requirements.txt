@@ -1,0 +1,14 @@
+langchain
+langchain-community
+langchain-openai
+langchain-text-splitters
+langgraph
+langchain-chroma
+chromadb
+pypdf
+gradio
+python-dotenv
+openai
+langsmith
+docx2txt
+PyMuPDF

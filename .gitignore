@@ -1,0 +1,36 @@
+# --- Secrets / environment ---
+.env
+.env.*
+*.key
+*.pem
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# --- Virtual envs ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- Packaging ---
+build/
+dist/
+*.egg-info/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- Logs / data ---
+*.log
+*.sqlite3
+*.db
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
