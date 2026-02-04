@@ -14,11 +14,12 @@ A RAG (Retrieval-Augmented Generation) application built with **LangChain**, **L
 
 ## 1. Local setup (after cloning)
 
-### Step 1: Clone and enter the project
+### Step 1: Clone and enter the project and create docs and chroma_db folders
 
 ```bash
 git clone <your-repo-url>
 cd RagChatbot
+mkdir -p data/docs data/chroma_db
 ```
 
 ### Step 2: Create a virtual environment (recommended)
