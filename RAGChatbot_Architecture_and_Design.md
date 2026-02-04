@@ -13,7 +13,7 @@ It describes how document ingestion, retrieval, and LLM-based answer generation 
 
 ---
 
-# 1️⃣ Project Code Flow (What happens when the app runs) {#1-project-code-flow-what-happens-when-the-app-runs}
+# 1️⃣ Project Code Flow (What happens when the app runs)
 
 Think of the app like a smart document Q&A assistant with a clean flow.
 
@@ -55,7 +55,7 @@ The question goes through a **LangGraph pipeline**:
 - The UI also shows **expandable source documents**.
 
 
-# 2️⃣ Architecture (How the system is structured) {#2-architecture-how-the-system-is-structured}
+# 2️⃣ Architecture (How the system is structured) 
 
 The architecture is intentionally **clean and layered**.
 
@@ -116,7 +116,7 @@ This separation makes the system:
 - Easier to extend
 
 
-# 3️⃣ Design Decisions (Why it’s built this way) {#3-design-decisions-why-its-built-this-way}
+# 3️⃣ Design Decisions (Why it’s built this way)
 
 ---
 
@@ -188,7 +188,7 @@ Each file does **one job well**:
 > This is a **principal-level design signal**.
 
 
-# 4️⃣ Reasoning (What problems this design solves) {#4-reasoning-what-problems-this-design-solves}
+# 4️⃣ Reasoning (What problems this design solves)
 
 ---
 
