@@ -1,4 +1,4 @@
-# RAG_LangGraph
+# RagChatbot
 
 A RAG (Retrieval-Augmented Generation) application built with **LangChain**, **LangGraph**, and **Gradio**. It supports PDF and Word documents, optional answer grounding/validation, and can be run locally or via Docker.
 
@@ -18,7 +18,7 @@ A RAG (Retrieval-Augmented Generation) application built with **LangChain**, **L
 
 ```bash
 git clone <your-repo-url>
-cd RAG_LangGraph
+cd RagChatbot
 ```
 
 ### Step 2: Create a virtual environment (recommended)
@@ -52,7 +52,7 @@ Optional (for LangSmith tracing and grounding):
 
 - `LANGCHAIN_TRACING_V2=true`
 - `LANGCHAIN_API_KEY=<your-langsmith-key>`
-- `LANGCHAIN_PROJECT=RAG_LangGraph`
+- `LANGCHAIN_PROJECT=RagChatbot`
 - `RAG_VALIDATE_GROUNDING=false` (set to `true` to enable answer validation/grounding)
 
 ### Step 5: Run the application
@@ -76,7 +76,7 @@ You can build and run the app in a container so you don’t need to install Pyth
 
 ```bash
 git clone <your-repo-url>
-cd RAG_LangGraph
+cd RagChatbot
 ```
 
 ### Step 2: Create `.env` (same as local)
@@ -90,7 +90,7 @@ cp env.example .env
 
 ### Step 3: Build the image
 
-From the `RAG_LangGraph` directory:
+From the `RagChatbot` directory:
 
 ```bash
 docker build -t rag-langgraph .
