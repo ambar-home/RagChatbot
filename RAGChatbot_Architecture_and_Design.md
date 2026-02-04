@@ -6,16 +6,14 @@ It describes how document ingestion, retrieval, and LLM-based answer generation 
 
 ## Table of Contents
 
-- [1️⃣ Project Code Flow (What happens when the app runs)](#1-project-code-flow-what-happens-when-the-app-runs)
-- [2️⃣ Architecture (How the system is structured)](#2-architecture-how-the-system-is-structured)
-- [3️⃣ Design Decisions (Why it's built this way)](#3-design-decisions-why-its-built-this-way)
-- [4️⃣ Reasoning (What problems this design solves)](#4-reasoning-what-problems-this-design-solves)
+- [1️⃣ Project Code Flow ](#1-project-code-flow-what-happens-when-the-app-runs)
+- [2️⃣ Architecture ](#2-architecture-how-the-system-is-structured)
+- [3️⃣ Design Decisions ](#3-design-decisions-why-its-built-this-way)
+- [4️⃣ Reasoning ](#4-reasoning-what-problems-this-design-solves)
 
 ---
 
-# 1️⃣ Project Code Flow (What happens when the app runs)
-
-Think of the app like a smart document Q&A assistant with a clean flow.
+# 1️⃣ Project Code Flow
 
 ---
 
@@ -25,7 +23,6 @@ Think of the app like a smart document Q&A assistant with a clean flow.
 - It builds a **retrieval graph** (the logic of how questions are handled).
 - It then launches a **Gradio web UI** where users can upload documents and ask questions.
 
----
 
 ## Step 2: User uploads documents
 
@@ -34,7 +31,6 @@ Think of the app like a smart document Q&A assistant with a clean flow.
 - The system **only indexes new or changed files** (incremental indexing).
 - Each document is broken into chunks and stored as **vectors in a database**.
 
----
 
 ## Step 3: User asks a question
 
@@ -45,7 +41,6 @@ The question goes through a **LangGraph pipeline**:
 - Build a clean **context** with citations
 - If nothing relevant is found, the system retries once or politely responds with *“not found”*
 
----
 
 ## Step 4: Answer is generated
 
@@ -55,9 +50,8 @@ The question goes through a **LangGraph pipeline**:
 - The UI also shows **expandable source documents**.
 
 
-# 2️⃣ Architecture (How the system is structured) 
+# 2️⃣ Architecture
 
-The architecture is intentionally **clean and layered**.
 
 ---
 
@@ -68,7 +62,6 @@ The architecture is intentionally **clean and layered**.
 - `app.py`
 - Only wires things together (**no business logic**)
 
----
 
 ### 2. UI Layer
 
@@ -82,7 +75,6 @@ Handles:
 
 > No AI logic here — only presentation and orchestration.
 
----
 
 ### 3. Orchestration Layer
 
@@ -92,7 +84,6 @@ Responsibilities:
 - Defines the **question → retrieval → answer** pipeline
 - Uses a **state machine (LangGraph)** instead of tangled if-else logic
 
----
 
 ### 4. RAG & Infrastructure Layer
 
@@ -106,7 +97,6 @@ Handles:
 - Streaming & grounding
 - Optional LangSmith tracing
 
----
 
 ## Why this separation matters
 
@@ -116,7 +106,7 @@ This separation makes the system:
 - Easier to extend
 
 
-# 3️⃣ Design Decisions (Why it’s built this way)
+# 3️⃣ Design Decisions 
 
 ---
 
@@ -130,7 +120,6 @@ RAG flows are not always straight lines.
 - Avoids deeply nested logic
 - Very interview-friendly and production-ready
 
----
 
 ## 🔹 2. Incremental indexing (not full re-index every time)
 
@@ -146,7 +135,6 @@ Re-indexing everything is slow and expensive.
 - Scales well
 - Saves compute and API costs
 
----
 
 ## 🔹 3. Streaming answers
 
@@ -158,7 +146,6 @@ Users hate waiting for long AI responses.
 - Feels responsive and modern
 - Matches ChatGPT-like UX
 
----
 
 ## 🔹 4. Optional grounding validation
 
@@ -176,7 +163,6 @@ LLMs can hallucinate even with RAG.
 - Safer for enterprise / compliance use cases
 - Flexible for dev vs prod
 
----
 
 ## 🔹 5. Strong separation of concerns
 
@@ -188,7 +174,7 @@ Each file does **one job well**:
 > This is a **principal-level design signal**.
 
 
-# 4️⃣ Reasoning (What problems this design solves)
+# 4️⃣ Reasoning 
 
 ---
 
@@ -197,7 +183,6 @@ Each file does **one job well**:
 - Answers must come from retrieved sources
 - Optional validation layer enforces grounding
 
----
 
 ## ✅ Scales cleanly
 
@@ -205,7 +190,6 @@ Each file does **one job well**:
 - Persistent vector database
 - Stateless query execution
 
----
 
 ## ✅ Easy to evolve
 
@@ -216,7 +200,6 @@ You can add later:
 - Multi-agent flows
 - Authentication / tenant isolation
 
----
 
 ## ✅ Production-friendly
 
